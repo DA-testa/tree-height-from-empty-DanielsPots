@@ -23,13 +23,13 @@ def compute_height(n, parents):
 
 def main():
     # implement input form keyboard and from files
-    file_name = input()
+    file_num = input()
     # let user input file name to use, don't allow file names with letter a
     # account for github input inprecision
-    if 'a' in file_name:
+    if 'a' in file_num:
         print("Invalid file, enter a file without the letter 'a'")
         return
-    # input number of elements
+    file_name = "{:02d}".format(int(file_num))
     try:
         with open(f"test/{file_name}", 'r') as f:
             # input values in one variable, separate with space, split these values in an array
