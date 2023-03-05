@@ -23,7 +23,7 @@ def compute_height(n, parents):
 
 def main():
     # implement input form keyboard and from files
-    file_name = input("Enter the name of the file: ")
+    file_name = input()
     # let user input file name to use, don't allow file names with letter a
     # account for github input inprecision
     if 'a' in file_name:
