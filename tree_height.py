@@ -2,6 +2,7 @@
 
 import sys
 import threading
+import os
 
 
 def compute_height(n, parents):
@@ -23,24 +24,23 @@ def compute_height(n, parents):
 
 def main():
     # implement input form keyboard and from files
-    file_num = input().strip()
-    # let user input file number to use, don't allow file names with letter a
-    # account for github input inprecision
-    if 'a' in file_num:
-        print("Invalid file, enter a file without the letter 'a'")
-        return
-    # pad file_num with leading zero if necessary
-    file_name = "{:02d}".format(int(file_num))
-    # input number of elements
-    try:
-        with open(f"test/{file_name}", 'r') as f:
-            # input values in one variable, separate with space, split these values in an array
-            n = int(f.readline())
-            parents = list(map(int, f.readline().split()))
-    except FileNotFoundError:
-        print("File not found, enter a valid file")
-        return
-    # call the function and output it's result
+    file_name = input().strip()
+    # let user input file name to use, don't allow file names with letter 'a'
+    while 'a' in file_name:
+        print("Invalid file, enter a file name without the letter 'a'")
+        file_name = input().strip()
+    # check if the file exists in the folder
+    while not os.path.exists(f"test/{file_name}"):
+        print("File not found, enter a valid file name")
+        file_name = input().strip()
+        while 'a' in file_name:
+            print("Invalid file, enter a file name without the letter 'a'")
+            file_name = input().strip()
+    # read inputs from the file
+    with open(f"test/{file_name}", 'r') as f:
+        n = int(f.readline())
+        parents = list(map(int, f.readline().split()))
+    # call the function and output its result
     print(compute_height(n, parents))
 
 # In Python, the default limit on recursion depth is rather low,
